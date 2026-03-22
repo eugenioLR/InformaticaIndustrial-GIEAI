@@ -1,5 +1,8 @@
 #include "es_primo.h"
 
+/*
+	Decide si un numero es primo o no en tiempo O(sqrt(n)).
+*/
 uint8_t es_primo(uint16_t numero)
 {
 	uint16_t i;
@@ -17,8 +20,8 @@ uint8_t es_primo(uint16_t numero)
 		return 0;
 	
 	// Busca todos los numeros impares para encontrar si alguno es divisor de 'numero'
-	// Busca hasta sqrt(numero), resolviendo la inecuacion se puede obtener:
-	// · i < sqrt(numero) <==> i*i < numero, con numero > 0 y i > 0
+	// Busca hasta sqrt(numero).
+	// · i < sqrt(numero) <=> i*i < numero. 	Con (numero > 0) y (i > 0)
 	for (i = 3; i*i < numero; i+=2)
 		if (!(numero%i))
 			return 0;

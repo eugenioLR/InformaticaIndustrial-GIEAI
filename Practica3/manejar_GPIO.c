@@ -1,5 +1,8 @@
 #include "manejar_GPIO.h"
 
+/*
+	Configura los puertos necesarios como entradas o salidas.
+*/
 void configurar_GPIO()
 {
 	LPC_GPIO0->FIODIR = ~(
@@ -30,14 +33,21 @@ void configurar_GPIO()
 	LPC_GPIO3->FIODIR = 0xFFFFFFFF;
 	
 	LPC_GPIO4->FIODIR = 0xFFFFFFFF;
-	
 }
 
+
+/*
+	Lee el valor del interruptor ISP (puerto 2.20)
+*/
 uint8_t leer_ISP()
 {
 	return (LPC_GPIO2->FIOPIN >> 20) & 1;
 }
 
+
+/*
+	Lee el valor de los pines especificados como un numero binario.
+*/
 uint16_t leer_numero()
 {
 	uint16_t valor_output = 0;
@@ -70,6 +80,9 @@ uint16_t leer_numero()
 }
 
 
+/*
+	Escribe el numero indicado en BCD a los pines indicados.
+*/
 void mostrar_numero_bcd_LEDs(uint32_t valor)
 {
 	// Escribimos los bits 0, 12, 13, 14, 15, 16, 17 a los pines 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9
@@ -104,15 +117,25 @@ void mostrar_numero_bcd_LEDs(uint32_t valor)
 	
 }
 
+/*
+	Muestra el digito especificado de un numero en BDC a un display de 7 segmentos por los pueros indicados
+*/
 void mostrar_numero_bcd_d7s(uint32_t valor, uint8_t digito)
 {
 	uint8_t digito_bcd;
 	uint16_t digito_one_hot;
 	
+	// Extraemos el digito de interes de nuestro numero
 	digito_bcd = (valor >> (digito * 4)) & 0x0000000F;
+	
+	// Convertimos el numero de BCD a one-hot encoding.
+	// Nota: one-hot encoding significa codificar el numero como un bit en la posicion indicada por el numero.
+	//		-Ej.  2 en OHE -> b00000100,  7 en OHE -> 0b10000000
 	digito_one_hot = (1 << digito_bcd);
 	
+	// Limpiamos los valores de los puertos 2.0 - 2.8
 	LPC_GPIO2->FIOPIN0 = 0x00;
+	
 	// Segmento A, activo para 0, 2, 3, 5, 6, 7, 8, 9
 	if(digito_one_hot & 0x03ED)
 		LPC_GPIO2->FIOSET = 1;
@@ -125,7 +148,7 @@ void mostrar_numero_bcd_d7s(uint32_t valor, uint8_t digito)
 	if(digito_one_hot & 0x03BA)
 		LPC_GPIO2->FIOSET0 = 0x04;
 	
-	// Segmento D, activo para 2,3,5,6,8
+	// Segmento D, activo para 2, 3, 5, 6, 8
 	if(digito_one_hot & 0x016C)
 		LPC_GPIO2->FIOSET0 = 0x08;
 	
@@ -142,16 +165,23 @@ void mostrar_numero_bcd_d7s(uint32_t valor, uint8_t digito)
 		LPC_GPIO2->FIOSET0 = 0x40;
 }
 
+/*
+	Invierte el valor de LD2.
+*/
 void actualizar_LD2()
 {
+	// Invertimos el valor del puerto 3.25
 	LPC_GPIO3->FIOPIN = LPC_GPIO3->FIOPIN ^ (1 << 25);
 }
 
+/*
+	Muestra a traves de LD3 el bit indicado del numero de entrada.
+*/
 void actualizar_LD3(uint8_t bit, uint16_t numero)
 {
 	uint8_t luz_encendida;
 	
-	// obtenemos si el bit que necesitamos es 0 o 1.
+	// Obtenemos si el bit que necesitamos es 0 o 1.
 	luz_encendida = (numero & (1u << bit)) != 0;
 	
 	// Reemplazamos el bit que necesitamos por el valor de "luz_encendida"
