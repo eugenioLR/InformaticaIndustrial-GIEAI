@@ -61,6 +61,7 @@ dkms.conf
 *.uvmpw
 *.uvtmp
 *.dbgconf
+*.dep
 
 # Build outputs
 *.axf
@@ -80,6 +81,7 @@ dkms.conf
 
 # Debugger and log files
 *.uvdebug
+*.uvgui*
 *.log
 *.plg
 
