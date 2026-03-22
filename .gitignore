@@ -53,3 +53,46 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# Keil µVision
+# Project files (user-specific settings, temporary files)
+*.uvguix.*
+*.uvoptx
+*.uvmpw
+*.uvtmp
+*.dbgconf
+
+# Build outputs
+*.axf
+*.hex
+*.bin
+*.map
+*.lst
+*.obj
+*.o 
+*.crf
+*.d  
+*.dep
+*.iex
+*.htm
+*.build_log.htm
+*.sct
+
+# Debugger and log files
+*.uvdebug
+*.log
+*.plg
+
+# Backup and temporary files
+*.bak
+*.tmp
+*~
+
+# Directories (common output folders)
+/Listings/
+/Objects/
+/DebugConfig/
+/RTE/_*
+
+# J-Link / other debugger settings
+JLinkSettings.ini
