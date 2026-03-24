@@ -28,7 +28,6 @@ void configurar_GPIO()
 	);
 
 	LPC_GPIO2->FIODIR = 0xFFFFFFFF & ~((1 << 8) | (1 << 20));
-	LPC_GPIO2->FIOCLR = (1 << 8);
 	
 	LPC_GPIO3->FIODIR = 0xFFFFFFFF;
 	
