@@ -1,4 +1,5 @@
 #include "delay.h"
+
 /*
 	Espera activa implementada como un bulce "for" simple.
 	Nota: cada iteracion consume 5 ciclos de reloj (5 instrucciones en MCU).
