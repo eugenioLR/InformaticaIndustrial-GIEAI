@@ -445,6 +445,11 @@
               <FileType>1</FileType>
               <FilePath>.\delay.c</FilePath>
             </File>
+            <File>
+              <FileName>manejar_IRQ.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\manejar_IRQ.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
