@@ -1,0 +1,16 @@
+--cpu Cortex-M3
+".\startup_lpc17xx.o"
+".\system_lpc17xx.o"
+".\rtx_conf_cm.o"
+".\RTX_CM3.lib"
+".\es_primo.o"
+".\main.o"
+".\manejar_gpio.o"
+".\manejar_irq.o"
+".\operaciones_bits.o"
+".\buffer_circular.o"
+".\manejar_hilos.o"
+C:\Keil\ARM\RV31\LIB\RTX_CM3.LIB
+--library_type=microlib --ro-base 0x00000000 --entry 0x00000000 --rw-base 0x10000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\practica.map" -o .\practica.axf

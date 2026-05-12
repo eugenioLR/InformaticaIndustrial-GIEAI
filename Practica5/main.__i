@@ -1,0 +1,6 @@
+-c --cpu Cortex-M3 -D__RTX -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -IC:\Keil\cmsis_rtos_rtx_v4p70\INC
+-I C:\Keil\ARM\RV31\INC
+-I C:\Keil\ARM\CMSIS\Include
+-I C:\Keil\ARM\Inc\NXP\LPC17xx
+
+-o .\main.o --omf_browse .\main.crf --depend .\main.d "main.c"
